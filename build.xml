@@ -1,0 +1,35 @@
+<project name="LR6" default="build" basedir=".">
+    <!-- Определение директорий -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="out/build"/>
+    <property name="dist.dir" value="out/dist"/>
+
+    <!-- Очистка старых файлов -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Компиляция -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <classpath>
+                <!-- Добавьте зависимости, если нужны -->
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- Создание JAR -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/LR6.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Цель по умолчанию -->
+    <target name="build" depends="jar"/>
+</project>
